@@ -440,12 +440,6 @@ bool UDPTransportInterface::transform_remote_locator(
             return true;
         }
 
-        // If we get here, the locator is a local unicast address
-        if (!is_locator_allowed(result_locator))
-        {
-            return false;
-        }
-
         // The locator is in the whitelist (or the whitelist is empty)
         Locator_t loopbackLocator;
         fill_local_ip(loopbackLocator);

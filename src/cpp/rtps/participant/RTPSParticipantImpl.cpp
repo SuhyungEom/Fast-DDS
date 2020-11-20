@@ -135,7 +135,10 @@ RTPSParticipantImpl::RTPSParticipantImpl(
     {
         UDPv4TransportDescriptor descriptor;
 
-        descriptor.TTL = TTL;
+        if (TTL == 0) {
+            descriptor.TTL = TTL;
+            descriptor.interfaceWhiteList.emplace_back("127.0.0.1");
+        }
         descriptor.sendBufferSize = m_att.sendSocketBufferSize;
         descriptor.receiveBufferSize = m_att.listenSocketBufferSize;
         m_network_Factory.RegisterTransport(&descriptor);
